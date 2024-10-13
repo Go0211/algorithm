@@ -1,0 +1,8 @@
+# Ignore .idea folder
+.idea
+
+# Ignore out folder
+out
+
+# Ignore specific file
+algorithm.iml
