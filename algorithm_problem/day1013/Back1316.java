@@ -1,3 +1,5 @@
+package day1013;
+
 import java.io.IOException;
 import java.util.Scanner;
 

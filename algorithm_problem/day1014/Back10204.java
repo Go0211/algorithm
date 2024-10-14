@@ -1,3 +1,5 @@
+package day1014;
+
 import java.util.*;
 
 class Edge {
