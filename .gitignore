@@ -8,5 +8,5 @@ out
 algorithm.iml
 
 # lgnore base java file
-algorithm_problem/Main.java
-algorithm_problem/Solution.java
+# algorithm_problem/Main.java
+# algorithm_problem/Solution.java
