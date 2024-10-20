@@ -1,5 +1,6 @@
-# Ignore .idea folder
+# Ignore .idea .metadata folder
 .idea
+.metadata
 
 # Ignore out folder
 out
@@ -8,5 +9,8 @@ out
 algorithm.iml
 
 # lgnore base java file
+algorithm_problem/bin
+algorithm_problem/.classpath
+algorithm_problem/.project
 # algorithm_problem/Main.java
 # algorithm_problem/Solution.java
