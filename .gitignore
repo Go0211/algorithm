@@ -12,5 +12,6 @@ algorithm.iml
 algorithm_problem/bin
 algorithm_problem/.classpath
 algorithm_problem/.project
+algorithm_problem/.txt
 # algorithm_problem/Main.java
 # algorithm_problem/Solution.java
