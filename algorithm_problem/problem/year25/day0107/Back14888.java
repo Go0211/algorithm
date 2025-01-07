@@ -3,8 +3,6 @@ package problem.year25.day0107;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.StringTokenizer;
 
 public class Back14888 {
@@ -31,7 +29,7 @@ public class Back14888 {
         for (int i = 0; i < 4; i++) {
             operations[i] = Integer.parseInt(st.nextToken());
         }
-        
+
         permAndCalc(numbers, operations, 0, new int[seq - 1], seq - 1);
 
         System.out.println(max);
