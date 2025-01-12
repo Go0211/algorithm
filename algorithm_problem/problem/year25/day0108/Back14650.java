@@ -17,7 +17,7 @@ public class Back14650 {
             arr[i] = String.valueOf(i).charAt(0);
         }
 
-        List<char[]> list =new ArrayList<>();
+        List<char[]> list = new ArrayList<>();
         perm(arr, new char[size], list, 0, size);
         int result = 0;
 

@@ -6,9 +6,9 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class Back1072 {
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         System.setIn(new FileInputStream("algorithm_problem/input.txt"));
-        BufferedReader  br =
+        BufferedReader br =
                 new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st =
                 new StringTokenizer(br.readLine(), " ");
@@ -20,15 +20,13 @@ public class Back1072 {
         if (win != totalGamePlay || targetPercent != 99) {
             answer = divideFind(0, 2000000000, win, totalGamePlay, targetPercent);
         }
-//        System.out.println(targetPercent);
         System.out.println(answer == -1 || answer * 100 / (totalGamePlay - win + answer) <= targetPercent ?
                 -1 : answer - win);
     }
 
     private static long divideFind(long min, long max, long win, long totalGamePlay, long targetPercent) {
-        long mid = (max + min)/ 2;
+        long mid = (max + min) / 2;
         long percent = mid * 100 / (totalGamePlay - win + mid);
-//        System.out.println("min -> " + min + " max -> " + max + " mid -> " + mid + " percent -> " + percent);
 
         if (max < min) {
             return min;
