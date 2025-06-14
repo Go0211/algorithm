@@ -7,7 +7,11 @@ public class Main {
     BufferedReader br =
         new BufferedReader(new InputStreamReader(System.in));
     PriorityQueue<Long> pq =
-        new PriorityQueue<>((x, y) -> compare(x, y));
+        new PriorityQueue<>((x, y) -> {
+          return Math.abs(x) == Math.abs(y)
+              ? (x > y ? 1 : -1)
+              : (Math.abs(x) > Math.abs(y) ? 1 : -1);
+        });
 
     int seq = Integer.parseInt(br.readLine());
 
@@ -23,11 +27,5 @@ public class Main {
     }
 
     System.out.print(sb);
-  }
-
-  static int compare(long x, long y) {
-    return Math.abs(x) == Math.abs(y)
-        ? (x > y ? 1 : -1)
-        : (Math.abs(x) > Math.abs(y) ? 1 : -1);
   }
 }
