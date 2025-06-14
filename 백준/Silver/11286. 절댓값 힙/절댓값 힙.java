@@ -6,7 +6,7 @@ public class Main {
     StringBuilder sb = new StringBuilder();
     BufferedReader br =
         new BufferedReader(new InputStreamReader(System.in));
-    PriorityQueue<Long> pq =
+    PriorityQueue<Integer> pq =
         new PriorityQueue<>((x, y) -> {
           return Math.abs(x) == Math.abs(y)
               ? (x > y ? 1 : -1)
@@ -16,7 +16,7 @@ public class Main {
     int seq = Integer.parseInt(br.readLine());
 
     for(int i = 0; i < seq; i++) {
-      long num = Long.parseLong(br.readLine());
+      int num = Integer.parseInt(br.readLine());
 
       if(num == 0) {
         sb.append(pq.isEmpty() ? 0 : pq.poll()).append("\n");
