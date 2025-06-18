@@ -1,41 +1,78 @@
-import java.util.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.PriorityQueue;
+import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
-        BufferedReader br =
-            new BufferedReader(new InputStreamReader(System.in));
-        int seq = Integer.parseInt(br.readLine());
-        long[][] dp = new long[seq - 1][seq];
-        int[] lineDepths = new int[seq - 1];
-        int[] oilCosts = new int[seq];
-        
-        StringTokenizer st =
-            new StringTokenizer(br.readLine());
-        for(int i = 0; i < seq - 1; i++) {
-            lineDepths[i] = Integer.parseInt(st.nextToken());
-        }
-        st = new StringTokenizer(br.readLine());
-        for(int i = 0; i < seq; i++) {
-            oilCosts[i] = Integer.parseInt(st.nextToken());
-        }
-        
-        Arrays.fill(dp[0], oilCosts[0] * lineDepths[0]);
-        
-        for(int i = 1; i < seq - 1; i++) {
-            long mins = Long.MAX_VALUE;
-            for(int j = 0; j < seq; j++) {
-                if(i < j) {
-                    dp[i][j] = mins;
-                } else {
-                    long value = dp[i - 1][j] + oilCosts[j] * lineDepths[i];
-                    
-                    dp[i][j] = value;
-                    mins = Math.min(value, mins);
-                }
-            }
-        }
-        
-        System.out.println(dp[seq - 2][seq - 1]);
+  static class Node implements Comparable<Node> {
+    int idx;
+    int oil;
+    long length;
+
+    Node(int idx, int oil, long length) {
+      this.idx = idx;
+      this.oil = oil;
+      this.length = length;
     }
+
+    @Override
+    public int compareTo(Node o) {
+      return this.oil == o.oil
+          ? this.length < o.length  ? -1 : 1
+          : this.oil < o.oil ? -1 : 1;
+    }
+
+    public String toString() {
+      return "idx : " + idx + " oil : " + oil + " length : " + length;
+    }
+  }
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br =
+        new BufferedReader(new InputStreamReader(System.in));
+    int seq = Integer.parseInt(br.readLine());
+    int[] lineDepths = new int[seq - 1];
+    int[] oilCosts = new int[seq - 1];
+    long total = 0;
+    long answer = 0;
+
+    StringTokenizer st =
+        new StringTokenizer(br.readLine());
+    for(int i = 0; i < seq - 1; i++) {
+      lineDepths[i] = Integer.parseInt(st.nextToken());
+    }
+    st = new StringTokenizer(br.readLine());
+    for(int i = 0; i < seq - 1; i++) {
+      int value = Integer.parseInt(st.nextToken());
+      oilCosts[i] = value;
+    }
+
+    PriorityQueue<Node> pq = new PriorityQueue<>();
+
+    for (int i = seq - 2; i >= 0; i--) {
+      pq.add(new Node(i, oilCosts[i], lineDepths[i] + total));
+      total += lineDepths[i];
+    }
+
+    int limitIdx = Integer.MAX_VALUE;
+    long minusLength = 0;
+    while(!pq.isEmpty()) {
+      Node node = pq.poll();
+
+      if (node.idx > limitIdx) {
+        continue;
+      }
+
+      answer += node.oil * (node.length - minusLength);
+      limitIdx = node.idx;
+      minusLength += node.length - minusLength;
+
+      if (limitIdx == 0) {
+        break;
+      }
+    }
+
+    System.out.println(answer);
+  }
 }
