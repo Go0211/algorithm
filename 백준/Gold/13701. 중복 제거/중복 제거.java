@@ -4,18 +4,18 @@ import java.io.*;
 public class Main {
   public static void main(String[] args) throws Exception {
     StringBuilder sb = new StringBuilder();
-    Set<String> sets = new HashSet<>();
+    BitSet sets = new BitSet(1 << 25);
 
     BufferedReader br =
         new BufferedReader(new InputStreamReader(System.in));
     StringTokenizer st =
         new StringTokenizer(br.readLine(), " ");
     while(st.hasMoreTokens()) {
-      String str = st.nextToken();
+      int num = Integer.parseInt(st.nextToken());
 
-      if (!sets.contains(str)) {
-        sb.append(str).append(" ");
-        sets.add(str);
+      if (!sets.get(num)) {
+        sets.set(num);
+        sb.append(num).append(" ");
       }
     }
 
