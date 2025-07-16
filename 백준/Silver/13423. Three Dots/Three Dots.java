@@ -20,17 +20,23 @@ public class Main {
       }
       Arrays.sort(arr);
 
-      for(int i = 0; i < N; i++) {
-          for(int j = i + 1; j < N; j++) {
-              int left = arr[i];
-              int right = arr[j];
-              int mid = (left + right) / 2;
-              
-              if((left + right) % 2 == 0 
-                 && Arrays.binarySearch(arr, mid) >= 0) {
-                  answer++;
-              }
+      for (int mid = 1; mid < N - 1; mid++) {
+        int left = mid - 1;
+        int right = mid + 1;
+        int target = arr[mid] * 2;
+
+        while (left >= 0 && right < N) {
+          int sum = arr[left] + arr[right];
+          if (sum == target) {
+            answer++;
+            left--;
+            right++;
+          } else if (sum < target) {
+            right++;
+          } else {
+            left--;
           }
+        }
       }
 
       sb.append(answer).append("\n");
