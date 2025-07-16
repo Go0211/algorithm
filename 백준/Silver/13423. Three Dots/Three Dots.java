@@ -11,23 +11,26 @@ public class Main {
       int N = Integer.parseInt(br.readLine());
       int answer = 0;
       int[] arr = new int[N];
-      Set<Integer> sets = new HashSet<>();
       StringTokenizer st =
           new StringTokenizer(br.readLine(), " ");
 
       for(int i = 0; i < N; i++) {
         int num = Integer.parseInt(st.nextToken());;
         arr[i] = num;
-        sets.add(num);
       }
       Arrays.sort(arr);
 
-      for(int i = 0; i < N - 1; i++) {
-        for(int j = N - 1; j > i; j--) {
-          if((arr[i] + arr[j]) % 2 == 0 && sets.contains((arr[i] + arr[j]) / 2)) {
-            answer++;
+      for(int i = 0; i < N; i++) {
+          for(int j = i + 1; j < N; j++) {
+              int left = arr[i];
+              int right = arr[j];
+              int mid = (left + right) / 2;
+              
+              if((left + right) % 2 == 0 
+                 && Arrays.binarySearch(arr, mid) >= 0) {
+                  answer++;
+              }
           }
-        }
       }
 
       sb.append(answer).append("\n");
