@@ -36,45 +36,39 @@ public class Main {
       }
     }
 
+    Arrays.sort(abrr);
     Arrays.sort(cdrr);
-    for(int ab : abrr) {
-      answer += upper(cdrr, ab * -1) - lower(cdrr, ab * -1);
+
+    int start = 0;
+    int end = n * n - 1;
+
+    while(start < n * n && end >= 0) {
+      int num = abrr[start] + cdrr[end];
+
+      if (num < 0) {
+        start++;
+      } else if (num > 0) {
+        end--;
+      } else {
+        long countAB = findSameNum(abrr, start, abrr[start], 1);
+        long countCD = findSameNum(cdrr, end, cdrr[end], -1);
+        start += (int) countAB;
+        end -= (int) countCD;
+        answer += countAB * countCD;
+      }
     }
 
     System.out.println(answer);
   }
 
-  static int upper(int[] arr, int target) {
-    int start = 0;
-    int end = arr.length;
+  static long findSameNum(int[] arr, int idx, int target, int add) {
+    long count = 0;
 
-    while(start < end) {
-      int mid = start + ((end - start) >>> 1);
-
-      if(arr[mid] <= target) {
-        start = mid + 1;
-      } else {
-        end = mid;
-      }
+    while(idx >= 0 && idx < arr.length && target == arr[idx]) {
+      idx += add;
+      count++;
     }
 
-    return start;
-  }
-
-  static int lower(int[] arr, int target) {
-    int start = 0;
-    int end = arr.length;
-
-    while(start < end) {
-      int mid = start + ((end - start) >>> 1);
-
-      if(arr[mid] < target) {
-        start = mid + 1;
-      } else {
-        end = mid;
-      }
-    }
-
-    return start;
+    return count;
   }
 }
