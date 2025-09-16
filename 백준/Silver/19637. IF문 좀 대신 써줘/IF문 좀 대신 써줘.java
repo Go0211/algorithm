@@ -18,19 +18,13 @@ public class Main {
             new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st =
             new StringTokenizer(br.readLine(), " ");
-        Set<Integer> set = new HashSet<>();
         int N = Integer.parseInt(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
         List<Node> list = new ArrayList<>();
         
         for(int i = 0; i < N; i++) {
             st = new StringTokenizer(br.readLine(), " ");
-            String str = st.nextToken();
-            int num = Integer.parseInt(st.nextToken());
-            if(!set.contains(num)) {
-                list.add(new Node(str, num));
-                set.add(num);
-            }
+            list.add(new Node(st.nextToken(), Integer.parseInt(st.nextToken())));
         }
         
         for(int i = 0; i < M; i++) {
