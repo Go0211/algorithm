@@ -26,19 +26,12 @@ public class Main {
                 }
             }
 
-            int[][] v = new int[R][C];
-            for (int[] vv : v) {
-                Arrays.fill(vv, Integer.MAX_VALUE);
-            }
-
             for(int i = 0; i < R; i++) {
                 if (arr[i][0] == '.') {
-                    answer = Math.min(bfs(arr, v, i, 0, R, C), answer);
-//                    System.out.println(i + " " + 0 + " " + answer);
+                    answer = Math.min(bfs(arr, i, 0, R, C), answer);
                 }
                 if (arr[i][C - 1] == '.') {
-                    answer = Math.min(bfs(arr, v, i, C-1, R, C), answer);
-//                    System.out.println(i + " " + (C - 1) + " " + answer);
+                    answer = Math.min(bfs(arr, i, C-1, R, C), answer);
                 }
                 if (arr[i][0] == '@' || arr[i][C - 1] == '@') {
                     sb.append(1).append("\n");
@@ -47,12 +40,10 @@ public class Main {
             }
             for(int i = 0; i < C; i++) {
                 if (arr[0][i] == '.') {
-                    answer = Math.min(bfs(arr, v, 0, i, R, C), answer);
-//                    System.out.println(0 + " " + i + " " + answer);
+                    answer = Math.min(bfs(arr, 0, i, R, C), answer);
                 }
                 if (arr[R - 1][i] == '.') {
-                    answer = Math.min(bfs(arr, v, R - 1, i, R, C), answer);
-//                    System.out.println((R - 1) + " " + i + " " + answer);
+                    answer = Math.min(bfs(arr, R - 1, i, R, C), answer);
                 }
                 if (arr[0][i] == '@' || arr[R - 1][i] == '@') {
                     sb.append(1).append("\n");
@@ -67,10 +58,10 @@ public class Main {
         System.out.println(sb);
     }
 
-    static int bfs(char[][] arr, int[][] v, int y, int x, int R, int C) {
+    static int bfs(char[][] arr, int y, int x, int R, int C) {
         ArrayDeque<int[]> queue = new ArrayDeque<>();
         queue.offer(new int[]{y, x, 1});
-        boolean[][] vv = new boolean[R][C];
+        boolean[][] v = new boolean[R][C];
         int breakCount = Integer.MAX_VALUE;
         int firstFind = '-';
 
@@ -90,11 +81,11 @@ public class Main {
                 int nx = dir[1] + preX;
 
                 if(ny >= 0 && ny < R && nx >= 0 && nx < C
-                        && !vv[ny][nx] && arr[ny][nx] != '#') {
+                        && !v[ny][nx] && arr[ny][nx] != '#') {
                     queue.offer(new int[]{ny, nx, count + 1});
 
                     if(arr[ny][nx] == '.') {
-                        vv[ny][nx] = true;
+                        v[ny][nx] = true;
                     } else if(arr[ny][nx] == '*') {
                         breakCount = count + 1;
                         firstFind = '*';
